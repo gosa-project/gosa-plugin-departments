@@ -1,0 +1,3 @@
+The department Plugin for GOsa is developed by GONICUS
+
+  Benjamin Zapiec <zapiec@gonicus.de>
