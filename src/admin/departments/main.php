@@ -21,6 +21,7 @@
  */
 
 namespace GosaDepartments\admin\departments;
+
 use \session as session;
 
 // Remove locks created by this plugin
@@ -43,11 +44,11 @@ if ($cleanup) {
     $DepartmentManagement = session::get('DepartmentManagement');
     $display = $DepartmentManagement->execute();
 
-    /* Reset requested? */
+    // Reset requested?
     if (isset($_GET['reset']) && $_GET['reset'] == 1) {
         session::un_set('DepartmentManagement');
     }
 
-    /* Show and save dialog */
+    // Show and save dialog
     session::set('DepartmentManagement', $DepartmentManagement);
 }

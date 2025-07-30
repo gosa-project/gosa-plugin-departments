@@ -22,6 +22,9 @@
             "role": "Developer",
             "homepage": "https://www.gonicus.de"
         }
-    ]
+    ],
+    "support": {
+        "issues" : "https://github.com/gosa-project/gosa-plugin-departments"
+    }
 }
 

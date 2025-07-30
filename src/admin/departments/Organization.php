@@ -62,38 +62,38 @@ class Organization extends Department
 
     /* Attributes
      */
-    var $st                       = "";
-    var $l                        = "";
-    var $description              = "";
-    var $userPassword             = "";
-    var $searchGuide              = "";
-    var $seeAlso                  = "";
-    var $businessCategory         = "";
-    var $x121Address              = "";
-    var $registeredAddress        = "";
-    var $destinationIndicator     = "";
-    var $preferredDeliveryMethod  = "";
-    var $telexNumber              = "";
-    var $telephoneNumber          = "";
-    var $internationaliSDNNumber  = "";
-    var $facsimileTelephoneNumber = "";
-    var $street                   = "";
-    var $postOfficeBox            = "";
-    var $postalCode               = "";
-    var $postalAddress            = "";
-    var $teletexTerminalIdentifier = "";
-    var $physicalDeliveryOfficeName = "";
+    var $st                       = '';
+    var $l                        = '';
+    var $description              = '';
+    var $userPassword             = '';
+    var $searchGuide              = '';
+    var $seeAlso                  = '';
+    var $businessCategory         = '';
+    var $x121Address              = '';
+    var $registeredAddress        = '';
+    var $destinationIndicator     = '';
+    var $preferredDeliveryMethod  = '';
+    var $telexNumber              = '';
+    var $telephoneNumber          = '';
+    var $internationaliSDNNumber  = '';
+    var $facsimileTelephoneNumber = '';
+    var $street                   = '';
+    var $postOfficeBox            = '';
+    var $postalCode               = '';
+    var $postalAddress            = '';
+    var $teletexTerminalIdentifier = '';
+    var $physicalDeliveryOfficeName = '';
 
     /* Naming attributes
      */
-    var $o            = "";
+    var $o            = '';
     var $type         = "organization";
-    var $orig_o       = "";
+    var $orig_o       = '';
     var $namingAttr   = "o";
 
     var $manager_enabled = FALSE;
-    var $manager_name = "";
-    var $manager = "";
+    var $manager_name = '';
+    var $manager = '';
 
     function __construct(&$config, $dn)
     {
@@ -109,22 +109,22 @@ class Organization extends Department
         $ldap = $config->get_ldap_link();
         $ldap->ls("(&(o=" . $this->o . ")(objectClass=organization))", $this->base, array('dn'));
         if ($this->orig_o == "new" && $ldap->count()) {
-            $message[] = MsgPool::duplicated(_("Name"));
+            $message[] = MsgPool::duplicated(_('Name'));
         } elseif ($this->orig_dn != $this->dn && $ldap->count()) {
-            $message[] = MsgPool::duplicated(_("Name"));
+            $message[] = MsgPool::duplicated(_('Name'));
         }
 
         /* All required fields are set? */
-        if ($this->o == "") {
-            $message[] = MsgPool::required(_("Name"));
+        if ($this->o == '') {
+            $message[] = MsgPool::required(_('Name'));
         } elseif (Tests::is_department_name_reserved($this->o, $this->base)) {
-            $message[] = MsgPool::reserved(_("Name"));
+            $message[] = MsgPool::reserved(_('Name'));
         } elseif (preg_match('/[#+:=>\\\\\/]/', $this->o)) {
-            $message[] = MsgPool::invalid(_("Name"), $this->o, "/[^#+:=>\\\\\/]/");
+            $message[] = MsgPool::invalid(_('Name'), $this->o, "/[^#+:=>\\\\\/]/");
         }
 
         /* Check description */
-        if ($this->description == "") {
+        if ($this->description == '') {
             $message[] = MsgPool::required(_("Description"));
         }
 
