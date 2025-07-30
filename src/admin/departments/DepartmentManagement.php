@@ -140,7 +140,6 @@ class DepartmentManagement extends Management
         }
     }
 
-
     function refreshDeps()
     {
         global $config;
@@ -150,7 +149,6 @@ class DepartmentManagement extends Management
         $headpage = $this->getHeadpage();
         $headpage->refreshBasesList();
     }
-
 
     // An action handler which enables to switch into deparmtment by clicking the names.
     function openEntry($action, $entry)
@@ -200,8 +198,7 @@ class DepartmentManagement extends Management
    */
     public static function get_support_departments()
     {
-        /* Domain
-     */
+        // Domain
         $types = array();
         $types['domain']['ACL']     = "domain";
         $types['domain']['CLASS']   = "domain";
@@ -214,8 +211,7 @@ class DepartmentManagement extends Management
         $types['domain']['TPL']     = tempSwitch(array("dep_oUnit.tpl", "domain.tpl"));
         $types['domain']['TR']      = ["domain", "Domain"];
 
-        /* Domain component
-     */
+        // Domain component
         $types['dcObject']['ACL']     = "dcObject";
         $types['dcObject']['CLASS']   = "dcObject";
         $types['dcObject']['ATTR']    = "dc";
@@ -227,8 +223,7 @@ class DepartmentManagement extends Management
         $types['dcObject']['TPL']     = tempSwitch(array("dep_oUnit.tpl", "dcObject.tpl"));
         $types['dcObject']['TR']      = ["locality", "Locality"];
 
-        /* Country object
-     */
+        // Country object
         $types['country']['ACL']     = "country";
         $types['country']['CLASS']   = "country";
         $types['country']['TAB']     = "COUNTRY_TABS";
@@ -240,8 +235,7 @@ class DepartmentManagement extends Management
         $types['country']['TPL']     = tempSwitch(array("dep_oUnit.tpl", "country.tpl"));
         $types['country']['TR']      = ["country", "Country"];
 
-        /* Locality object
-     */
+        // Locality object
         $types['locality']['ACL']     = "locality";
         $types['locality']['CLASS']   = "locality";
         $types['locality']['TAB']     = "LOCALITY_TABS";
@@ -253,8 +247,7 @@ class DepartmentManagement extends Management
         $types['locality']['TPL']     = tempSwitch(array("dep_oUnit.tpl", "locality.tpl"));
         $types['locality']['TR']      = ["locality", "Locality"];
 
-        /* Organization
-     */
+        // Organization
         $types['organization']['ACL']     = "organization";
         $types['organization']['CLASS']   = "organization";
         $types['organization']['TAB']     = "ORGANIZATION_TABS";
@@ -267,8 +260,7 @@ class DepartmentManagement extends Management
         $types['organization']['TR']      = ["organization", "Organization"];
 
 
-        /* Department
-     */
+        // Department
         $types['organizationalUnit']['ACL']     = "department";
         $types['organizationalUnit']['CLASS']   = "department";
         $types['organizationalUnit']['TAB']     = "DEPTABS";

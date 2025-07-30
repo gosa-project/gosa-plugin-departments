@@ -108,7 +108,7 @@ class Organization extends Department
         /* Check for presence of this department */
         $ldap = $config->get_ldap_link();
         $ldap->ls("(&(o=" . $this->o . ")(objectClass=organization))", $this->base, array('dn'));
-        if ($this->orig_o == "new" && $ldap->count()) {
+        if ($this->orig_o == 'new' && $ldap->count()) {
             $message[] = MsgPool::duplicated(_('Name'));
         } elseif ($this->orig_dn != $this->dn && $ldap->count()) {
             $message[] = MsgPool::duplicated(_('Name'));
@@ -130,9 +130,9 @@ class Organization extends Department
 
         /* Check if we are allowed to create or move this object
          */
-        if ($this->orig_dn == "new" && !$this->acl_is_createable($this->base)) {
+        if ($this->orig_dn == 'new' && !$this->acl_is_createable($this->base)) {
             $message[] = MsgPool::permCreate();
-        } elseif ($this->orig_dn != "new" && $this->base != $this->orig_base && !$this->acl_is_moveable($this->base)) {
+        } elseif ($this->orig_dn != 'new' && $this->base != $this->orig_base && !$this->acl_is_moveable($this->base)) {
             $message[] = MsgPool::permMove();
         }
 

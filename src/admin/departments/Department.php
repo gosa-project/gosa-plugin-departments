@@ -34,7 +34,7 @@ use \LDAP as LDAP;
 
 class Department extends Plugin
 {
-    /* department attributes */
+    // department attributes
     var $ou = "";
     var $description = "";
     var $base = "";
@@ -58,8 +58,16 @@ class Department extends Plugin
 
     /* attribute list for save action */
     var $attributes = array(
-        "ou", "description", "businessCategory", "st", "l", "postalAddress",
-        "telephoneNumber", "facsimileTelephoneNumber", "gosaUnitTag", "manager"
+        "ou",
+        "description",
+        "businessCategory",
+        "st",
+        "l",
+        "postalAddress",
+        "telephoneNumber",
+        "facsimileTelephoneNumber",
+        "gosaUnitTag",
+        "manager"
     );
 
     /* Do not append the structural object classes here, they are added dynamically in the constructor */
@@ -85,7 +93,7 @@ class Department extends Plugin
          */
         $ldap = $config->get_ldap_link();
         $ldap->cd($config->current['BASE']);
-        if ($dn == "" || $dn == "new" || !$ldap->dn_exists($dn)) {
+        if ($dn == "" || $dn == 'new' || !$ldap->dn_exists($dn)) {
             $this->objectclasses = array_merge($this->structuralOC, $this->objectclasses);
         } else {
             $ldap->cat($dn, array("structuralObjectClass"));
@@ -118,7 +126,7 @@ class Department extends Plugin
         $this->config = $config;
 
         /* Set base */
-        if ($this->dn == "new") {
+        if ($this->dn == 'new') {
             $ui = get_userinfo();
             if (Session::is_set('CurrentMainBase')) {
                 $this->base = Session::get('CurrentMainBase');
@@ -138,7 +146,7 @@ class Department extends Plugin
         $this->orig_base = $this->base;
 
         /* Is administrational Unit? */
-        if ($dn != "new" && in_array_ics('gosaAdministrativeUnit', $this->attrs['objectClass'])) {
+        if ($dn != 'new' && in_array_ics('gosaAdministrativeUnit', $this->attrs['objectClass'])) {
             $this->is_administrational_unit = true;
             $this->initially_was_tagged = true;
         }
@@ -236,7 +244,7 @@ class Department extends Plugin
 
         /* Hide all departments, that are subtrees of this department */
         $bases = $this->get_allowed_bases();
-        if (($this->dn == "new") || ($this->dn == "")) {
+        if (($this->dn == 'new') || ($this->dn == "")) {
             $tmp = $bases;
         } else {
             $tmp    = array();
@@ -362,26 +370,26 @@ class Department extends Plugin
         /* Check for presence of this department */
         $ldap = $this->config->get_ldap_link();
         $ldap->ls("(&(ou=" . $this->ou . ")(objectClass=organizationalUnit))", $this->base, array('dn'));
-        if ($this->orig_dn == "new" && $ldap->count()) {
-            $message[] = MsgPool::duplicated(_("Name"));
+        if ($this->orig_dn == 'new' && $ldap->count()) {
+            $message[] = MsgPool::duplicated(_('Name'));
         } elseif ($this->orig_dn != $this->dn && $ldap->count()) {
-            $message[] = MsgPool::duplicated(_("Name"));
+            $message[] = MsgPool::duplicated(_('Name'));
         }
 
         /* All required fields are set? */
         if ($this->ou == "") {
-            $message[] = MsgPool::required(_("Name"));
+            $message[] = MsgPool::required(_('Name'));
         }
         if ($this->description == "") {
             $message[] = MsgPool::required(_("Description"));
         }
 
         if (Tests::is_department_name_reserved($this->ou, $this->base)) {
-            $message[] = MsgPool::reserved(_("Name"));
+            $message[] = MsgPool::reserved(_('Name'));
         }
 
         if (preg_match('/[#+:=>\\\\\/]/', $this->ou)) {
-            $message[] = MsgPool::invalid(_("Name"), $this->ou, "/[^#+:=>\\\\\/]/");
+            $message[] = MsgPool::invalid(_('Name'), $this->ou, "/[^#+:=>\\\\\/]/");
         }
         if (!Tests::is_phone_nr($this->telephoneNumber)) {
             $message[] = MsgPool::invalid(_("Phone"), $this->telephoneNumber, "/[\/0-9 ()+*-]/");
@@ -397,9 +405,9 @@ class Department extends Plugin
 
         /* Check if we are allowed to create or move this object
          */
-        if ($this->orig_dn == "new" && !$this->acl_is_createable($this->base)) {
+        if ($this->orig_dn == 'new' && !$this->acl_is_createable($this->base)) {
             $message[] = MsgPool::permCreate();
-        } elseif ($this->orig_dn != "new" && $this->base != $this->orig_base && !$this->acl_is_moveable($this->base)) {
+        } elseif ($this->orig_dn != 'new' && $this->base != $this->orig_base && !$this->acl_is_moveable($this->base)) {
             $message[] = MsgPool::permMove();
         }
 
@@ -679,8 +687,13 @@ class Department extends Plugin
             "plRequirements" => array(
                 'ldapSchema' => array('gosaDepartment' => '>=2.7'),
                 'onFailureDisablePlugin' => array(
-                    __CLASS__, 'DepartmentManagement',
-                    'country', 'dcObject', 'domain', 'locality', 'organization'
+                    __CLASS__,
+                    'DepartmentManagement',
+                    'country',
+                    'dcObject',
+                    'domain',
+                    'locality',
+                    'organization'
                 )
             ),
 

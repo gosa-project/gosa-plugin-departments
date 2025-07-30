@@ -51,18 +51,18 @@ class Domain extends Department
         $ldap = $config->get_ldap_link();
         $ldap->ls("(&(dc=" . $this->dc . ")(objectClass=domain))", $this->base, array('dn'));
         if ($this->orig_dc == "new" && $ldap->count()) {
-            $message[] = MsgPool::duplicated(_("Name"));
+            $message[] = MsgPool::duplicated(_('Name'));
         } elseif ($this->orig_dn != $this->dn && $ldap->count()) {
-            $message[] = MsgPool::duplicated(_("Name"));
+            $message[] = MsgPool::duplicated(_('Name'));
         }
 
         /* All required fields are set? */
         if ($this->dc == "") {
-            $message[] = MsgPool::required(_("Name"));
+            $message[] = MsgPool::required(_('Name'));
         } elseif (Tests::is_department_name_reserved($this->dc, $this->base)) {
-            $message[] = MsgPool::reserved(_("Name"));
+            $message[] = MsgPool::reserved(_('Name'));
         } elseif (preg_match('/[^a-z0-9 \.,\-_]/i', $this->dc)) {
-            $message[] = MsgPool::invalid(_("Name"), $this->dc, "/[a-z0-9 \.,\-_]/i");
+            $message[] = MsgPool::invalid(_('Name'), $this->dc, "/[a-z0-9 \.,\-_]/i");
         }
 
         /* Check description */
@@ -95,7 +95,7 @@ class Domain extends Department
             "plCategory"    => array("department"),
 
             "plProvidedAcls" => array(
-                "dc"                => _("Name"),
+                "dc"                => _('Name'),
                 "description"       => _("Description"),
                 "base"              => _("Base"),
                 "manager"                 => _("Manager"),

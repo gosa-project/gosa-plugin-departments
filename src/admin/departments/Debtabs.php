@@ -35,8 +35,7 @@ class Deptabs extends Tabs
     {
         Tabs::__construct($config, $data, $dn, $category, $hide_refs, $hide_acls);
 
-        /* Detect the base class  (The classs which extends from department)
-     */
+        // Detect the base class  (The classs which extends from department)
         foreach ($this->by_object as $name => $object) {
             if ($object instanceof Department) {
                 $this->base_name = get_class($object);
@@ -70,13 +69,12 @@ class Deptabs extends Tabs
             $new_dn = $baseobject->orig_dn;
         }
 
-        /* Move group? */
-        if ($this->dn != $new_dn && $this->dn != "new") {
+        // Move group?
+        if ($this->dn != $new_dn && $this->dn != 'new') {
             $baseobject->move($this->dn, $new_dn);
         }
 
-        /* Update department cache.
-     */
+        // Update department cache.
         if ($this->dn != $new_dn) {
             global $config;
             $config->get_departments();

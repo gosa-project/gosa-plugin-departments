@@ -33,15 +33,15 @@ class Locality extends Department
     var $objectclasses  = array("top", "gosaDepartment");
     var $structuralOC   = array("locality");
 
-    var $description = "";
+    var $description = '';
     var $type       = "locality";
-    var $l          = "";
-    var $orig_l     = "";
+    var $l          = '';
+    var $orig_l     = '';
     var $namingAttr = "l";
 
     var $manager_enabled = FALSE;
-    var $manager_name = "";
-    var $manager = "";
+    var $manager_name = '';
+    var $manager = '';
 
     function check()
     {
@@ -50,31 +50,31 @@ class Locality extends Department
         /* Check for presence of this department */
         $ldap = $this->config->get_ldap_link();
         $ldap->ls("(&(l=" . $this->l . ")(objectClass=locality))", $this->base, array('dn'));
-        if ($this->orig_l == "new" && $ldap->count()) {
-            $message[] = MsgPool::duplicated(_("Name"));
+        if ($this->orig_l == 'new' && $ldap->count()) {
+            $message[] = MsgPool::duplicated(_('Name'));
         } elseif ($this->orig_dn != $this->dn && $ldap->count()) {
-            $message[] = MsgPool::duplicated(_("Name"));
+            $message[] = MsgPool::duplicated(_('Name'));
         }
 
         /* All required fields are set? */
-        if ($this->l == "") {
-            $message[] = MsgPool::required(_("Name"));
+        if ($this->l == '') {
+            $message[] = MsgPool::required(_('Name'));
         } elseif (Tests::is_department_name_reserved($this->l, $this->base)) {
-            $message[] = MsgPool::reserved(_("Name"));
+            $message[] = MsgPool::reserved(_('Name'));
         } elseif (preg_match('/[#+:=>\\\\\/]/', $this->l)) {
-            $message[] = MsgPool::invalid(_("Name"), $this->l, "/[^#+:=>\\\\\/]/");
+            $message[] = MsgPool::invalid(_('Name'), $this->l, "/[^#+:=>\\\\\/]/");
         }
 
         /* Check description */
-        if ($this->description == "") {
+        if ($this->description == '') {
             $message[] = MsgPool::required(_("Description"));
         }
 
         /* Check if we are allowed to create or move this object
          */
-        if ($this->orig_dn == "new" && !$this->acl_is_createable($this->base)) {
+        if ($this->orig_dn == 'new' && !$this->acl_is_createable($this->base)) {
             $message[] = MsgPool::permCreate();
-        } elseif ($this->orig_dn != "new" && $this->base != $this->orig_base && !$this->acl_is_moveable($this->base)) {
+        } elseif ($this->orig_dn != 'new' && $this->base != $this->orig_base && !$this->acl_is_moveable($this->base)) {
             $message[] = MsgPool::permMove();
         }
 
