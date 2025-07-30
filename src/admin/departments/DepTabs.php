@@ -25,7 +25,7 @@ namespace GosaDepartments\admin\departments;
 use \tabs as Tabs;
 use \LDAP as LDAP;
 
-class Deptabs extends Tabs
+class DepTabs extends Tabs
 {
     var $base = "";
     var $moved = FALSE;

@@ -38,7 +38,7 @@ class DepartmentManagement extends Management
     var $matIcon        = "source";
 
     // Tab definition
-    protected $tabClass = "deptabs";
+    protected $tabClass = "GosaDepartments\admin\departments\DepTabs";
     protected $tabType = "DEPTABS";
     protected $aclCategory = "department";
     protected $aclPlugin   = "generic";
