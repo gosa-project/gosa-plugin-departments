@@ -6,7 +6,7 @@
 
             {render acl=${$namingAttr}ACL}
             <div class="input-field">
-                <input type='text' id="{$namingAttr}" name="{$namingAttr}" value="{$o}" title="{t}Name of {$trString[0]} to create{/t}">
+                <input type='text' id="{$namingAttr}" name="{$namingAttr}" value="{${$namingAttr}}" title="{t}Name of {$trString[0]} to create{/t}">
                 <label for="c">{t}Name of {$trString[0]}{/t}{$must}</label>
             </div>
             {/render}
